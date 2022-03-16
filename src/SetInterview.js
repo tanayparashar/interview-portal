@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const emails=["tanay641@gmail.com","nayansethi30@gmail.com","someuser@gmail.com","anotheruser@gmail.com"];
 const SetInterview = (props) => {
   const [startTime, updateStartTime] = useState("");
@@ -32,6 +32,7 @@ const SetInterview = (props) => {
     .then(response => response.json())
     .then(data => {
     console.log('Success:', data);
+     window.location.reload(false);
     })
     .catch((error) => {
     console.error('Error:', error);

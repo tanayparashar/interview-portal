@@ -2,40 +2,45 @@ import './App.css';
 import { useEffect ,useState} from 'react';
 import Candidate from "./Candidate";
 import SetInterview from './SetInterview';
-
 function App() {
   const [candidateObj,setcandidateObj]=useState([]);
-  useEffect(() => {
-    requestOBJ();
-  }, []);
+  
   function requestOBJ()
   {
-    fetch("http://localhost:5000/candidate", {
-    method: "GET", // or 'PUT'
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    },
+    fetch("http://localhost:5000/candidates", {
+      method: "GET", // or 'PUT'
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      mode:"cors"
     })
     .then((res) => (res.json()))
     .then((data) => (setcandidateObj(data)));
-    //console.log(candidateObj);
   }
+  useEffect(() => {
+    requestOBJ();
+  },[]);
   return(
     <div>
       <SetInterview></SetInterview>
+      <div>
       {
         candidateObj.map((candidate)=>{
+          //console.log(candidate);
           return(
             <Candidate
-              name={candidate.name}
-              start={candidate.start}
-              end={candidate.end}
+              candidateEmail={candidate.candidateEmail}
+              candidateName={candidate.candidateName}
+              interviewerName={candidate.interviewerName}
+              interviewerEmail={candidate.interviewerEmail}
+              startTime={candidate.startTime}
+              endTime={candidate.endTime}
             />
         );
         })
-        
       }
+      </div>
     </div>
   );
 
