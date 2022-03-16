@@ -10,7 +10,7 @@ function App() {
   }, []);
   function requestOBJ()
   {
-    fetch("http://localhost:5000/home", {
+    fetch("http://localhost:5000/candidate", {
     method: "GET", // or 'PUT'
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -21,18 +21,25 @@ function App() {
     .then((data) => (setcandidateObj(data)));
     //console.log(candidateObj);
   }
-  <SetInterview butVal="submit"></SetInterview>
   return(
-    candidateObj.map((candidate)=>
-    {
-      console.log(candidate);
-      return(
-        <Candidate
-          name={candidate.name}
-          start={candidate.start}
-          end={candidate.end}
-        />
-      );}))
+    <div>
+      <SetInterview></SetInterview>
+      {
+        candidateObj.map((candidate)=>{
+          return(
+            <Candidate
+              name={candidate.name}
+              start={candidate.start}
+              end={candidate.end}
+            />
+        );
+        })
+        
+      }
+    </div>
+  );
+
+
 }
 
 export default App;
