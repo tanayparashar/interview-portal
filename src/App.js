@@ -14,8 +14,7 @@ function App() {
   //const [hello,updateHello]=useState("hello");
   function customupdate(candidateName,candidateEmail,interviewerName,interviewerEmail, startTime, endTime)
   {
-    
-    console.log(candidateName,candidateEmail,interviewerName,interviewerEmail, startTime, endTime);
+    //console.log(candidateName,candidateEmail,interviewerName,interviewerEmail, startTime, endTime);
     updateCandidateName(candidateName);
     updateCandidateEmail(candidateEmail);
     updateStartTime(startTime);
@@ -55,7 +54,7 @@ function App() {
                   <span>{candidate.interviewerEmail}</span>
                   <span>{candidate.startTime}</span>
                   <span>{candidate.endTime}</span>
-                  <button onSubmit={()=>customupdate(candidate.candidateName,candidate.candidateEmail,candidate.interviewerName,candidate.interviewerEmail, candidate.startTime, candidate.endTime)}>Edit</button>
+                  <button onClick={()=>customupdate(candidate.candidateName,candidate.candidateEmail,candidate.interviewerName,candidate.interviewerEmail, candidate.startTime, candidate.endTime)}>Edit</button>
               </div>
             );
           })
