@@ -1,10 +1,29 @@
 import './App.css';
 import { useEffect ,useState} from 'react';
-import Candidate from "./Candidate";
+//import Candidate from "./Candidate";
 import SetInterview from './SetInterview';
 function App() {
   const [candidateObj,setcandidateObj]=useState([]);
-  
+  const [startTime, updateStartTime] = useState("");
+  const [endTime, updateEndTime] = useState("");
+  const [candidateName,updateCandidateName]=useState("");
+  const [candidateEmail,updateCandidateEmail]=useState("");
+  const [interviewerName,updateInterName]=useState("");
+  const [interviewerEmail,updateInterEmail]=useState("");
+
+  //const [hello,updateHello]=useState("hello");
+  function customupdate(candidateName,candidateEmail,interviewerName,interviewerEmail, startTime, endTime)
+  {
+    
+    console.log(candidateName,candidateEmail,interviewerName,interviewerEmail, startTime, endTime);
+    updateCandidateName(candidateName);
+    updateCandidateEmail(candidateEmail);
+    updateStartTime(startTime);
+    updateEndTime(endTime);
+    updateInterName(interviewerName);
+    updateInterEmail(interviewerEmail);
+    <SetInterview interviewerEmail={interviewerEmail} interviewerName={interviewerName} candidateEmail={candidateEmail} candidateName={candidateName} endTime={endTime} startTime={startTime} updateInterEmail={updateInterEmail} updateInterName={updateInterName} updateCandidateEmail={updateCandidateEmail} updateCandidateName={updateCandidateName} updateEndTime={updateEndTime} updateStartTime={updateStartTime}></SetInterview>
+  }
   function requestOBJ()
   {
     fetch("http://localhost:5000/candidates", {
@@ -17,28 +36,29 @@ function App() {
     })
     .then((res) => (res.json()))
     .then((data) => (setcandidateObj(data)));
+    
   }
   useEffect(() => {
     requestOBJ();
   },[]);
   return(
     <div>
-      <SetInterview></SetInterview>
+      <SetInterview interviewerEmail={interviewerEmail} interviewerName={interviewerName} candidateEmail={candidateEmail} candidateName={candidateName} endTime={endTime} startTime={startTime} updateInterEmail={updateInterEmail} updateInterName={updateInterName} updateCandidateEmail={updateCandidateEmail} updateCandidateName={updateCandidateName} updateEndTime={updateEndTime} updateStartTime={updateStartTime}></SetInterview>
       <div>
       {
-        candidateObj.map((candidate)=>{
-          //console.log(candidate);
-          return(
-            <Candidate
-              candidateEmail={candidate.candidateEmail}
-              candidateName={candidate.candidateName}
-              interviewerName={candidate.interviewerName}
-              interviewerEmail={candidate.interviewerEmail}
-              startTime={candidate.startTime}
-              endTime={candidate.endTime}
-            />
-        );
-        })
+          candidateObj.map((candidate)=>{
+            return(
+              <div>
+                  <span>{candidate.candidateEmail}</span>
+                  <span>{candidate.candidateName} </span>
+                  <span>{candidate.interviewerName} </span>
+                  <span>{candidate.interviewerEmail}</span>
+                  <span>{candidate.startTime}</span>
+                  <span>{candidate.endTime}</span>
+                  <button onSubmit={()=>customupdate(candidate.candidateName,candidate.candidateEmail,candidate.interviewerName,candidate.interviewerEmail, candidate.startTime, candidate.endTime)}>Edit</button>
+              </div>
+            );
+          })
       }
       </div>
     </div>

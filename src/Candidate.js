@@ -1,5 +1,6 @@
+import SetInterview from "./SetInterview";
 const Candidate = (props) => {
-  console.log(props);
+  //console.log(props);
   const { candidateEmail,candidateName ,interviewerName,interviewerEmail,startTime,endTime} = props;
   return (
     <div>
@@ -9,6 +10,7 @@ const Candidate = (props) => {
       <span>{interviewerEmail}</span>
       <span>{startTime}</span>
       <span>{endTime}</span>
+      <button>edit</button>
     </div>
   );
 };

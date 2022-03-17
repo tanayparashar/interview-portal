@@ -1,12 +1,15 @@
-import { useState } from "react";
+
 const emails=["tanay641@gmail.com","nayansethi30@gmail.com","someuser@gmail.com","anotheruser@gmail.com"];
 const SetInterview = (props) => {
-  const [startTime, updateStartTime] = useState("");
-  const [endTime, updateEndTime] = useState("");
-  const [candidateName,updateCandidateName]=useState("");
-  const [candidateEmail,updateCandidateEmail]=useState("");
-  const [interviewerName,updateInterName]=useState("");
-  const [interviewerEmail,updateInterEmail]=useState("");
+
+  // const [startTime, updateStartTime] = useState("");
+  // const [endTime, updateEndTime] = useState("");
+  // const [candidateName,updateCandidateName]=useState("");
+  // const [candidateEmail,updateCandidateEmail]=useState("");
+  // const [interviewerName,updateInterName]=useState("");
+  // const [interviewerEmail,updateInterEmail]=useState("");
+  //console.log(props);
+  const {candidateName,startTime,endTime,candidateEmail,interviewerName,interviewerEmail,updateInterEmail,updateInterName,updateCandidateEmail,updateCandidateName,updateEndTime,updateStartTime}=props;
   function setCandidate()
   {
     var starttime=(startTime.slice(0,2)+startTime.slice(3));
