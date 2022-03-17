@@ -16,7 +16,7 @@ function App() {
   {
     let data={candidateName:candidateName,candidateEmail:candidateEmail,interviewerName:interviewerName,interviewerEmail:interviewerEmail, startTime:startTime, endTime:endTime}
     console.log(candidateName,candidateEmail,interviewerName,interviewerEmail, startTime, endTime);
-    fetch('http://patch:5000/candidates/delete', {
+    fetch('https://interview-backend-scaler.herokuapp.com/candidates/delete', {
     method: 'POST', // or 'PUT'
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -43,7 +43,7 @@ function App() {
 
   function requestOBJ()
   {
-    fetch("http://localhost:5000/candidates", {
+    fetch("https://interview-backend-scaler.herokuapp.com/candidates", {
       method: "GET", // or 'PUT'
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -65,14 +65,16 @@ function App() {
       {
           candidateObj.map((candidate)=>{
             return(
-              <div>
-                  <span>{candidate.candidateEmail}</span>
-                  <span>{candidate.candidateName} </span>
-                  <span>{candidate.interviewerName} </span>
-                  <span>{candidate.interviewerEmail}</span>
-                  <span>{candidate.startTime}</span>
-                  <span>{candidate.endTime}</span>
-                  <button onClick={(e)=>{e.preventDefault();customupdate(candidate.candidateName,candidate.candidateEmail,candidate.interviewerName,candidate.interviewerEmail, candidate.startTime, candidate.endTime);}}>Edit</button>
+              <div className="cand-center">
+              <div className="candidate-table">
+                  <span> Candidate Email   : {candidate.candidateEmail}</span>
+                  <span> Candidate Name   : {candidate.candidateName} </span>
+                  <span> Interviewer Email   : {candidate.interviewerEmail}</span>
+                  <span> Interviewer Name   : {candidate.interviewerName} </span>
+                  <span> Start Time   : {candidate.startTime}</span>
+                  <span> End Time   : {candidate.endTime}</span>
+                  <button className="edit-button" onClick={(e)=>{e.preventDefault();customupdate(candidate.candidateName,candidate.candidateEmail,candidate.interviewerName,candidate.interviewerEmail, candidate.startTime, candidate.endTime);}}>Edit</button>
+              </div>
               </div>
             );
           })

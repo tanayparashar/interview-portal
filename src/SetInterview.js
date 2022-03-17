@@ -23,7 +23,7 @@ const SetInterview = (props) => {
       endTime:parseInt(endtime)
     };
 
-    fetch('http://patch:5000/candidates', {
+    fetch('https://interview-backend-scaler.herokuapp.com/candidates', {
     method: 'POST', // or 'PUT'
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -35,21 +35,28 @@ const SetInterview = (props) => {
     .then(response => response.json())
     .then(data => {
     console.log('Success:', data);
-     window.location.reload(false);
+    if(!data.createdCandidate)
+    {
+      alert(data.message);
+    }
+    else{
+      window.location.reload(false);
+    }
     })
     .catch((error) => {
     console.error('Error:', error);
 });
   }
   return(
-    <div>
-      <form  onSubmit={(e) => {
+    <div className="page">
+      <form className="candidate-form" onSubmit={(e) => {
           e.preventDefault();
           setCandidate();
         }}
       >
-        <label htmlFor="Candidate Email">
-          candidateEmail
+        <div className="form-table">
+        <label className="form-info" htmlFor="Candidate Email">
+          Candidate Email
           <select
             id="candidateEmail"
             value={candidateEmail}
@@ -64,7 +71,7 @@ const SetInterview = (props) => {
             ))}
           </select>
         </label>
-        <label htmlFor="Candidate Name">
+        <label className="form-info" htmlFor="Candidate Name">
           Candidate Name
           <input
             id="CandidateName"
@@ -73,16 +80,10 @@ const SetInterview = (props) => {
             onChange={(e) => updateCandidateName(e.target.value)}
           />
         </label>
-        <label htmlFor="Interviewer Name">
-          Interviewer Name
-          <input
-            id="interviewerName"
-            value={interviewerName}
-            placeholder="Interviewer Name"
-            onChange={(e) => updateInterName(e.target.value)}
-          />
-        </label>
-        <label htmlFor="Interviewer Email">
+        </div>
+
+        <div className="form-table">
+        <label className="form-info" htmlFor="Interviewer Email">
           Interviewer Email
           <input
             id="interviewerEmail"
@@ -91,7 +92,19 @@ const SetInterview = (props) => {
             onChange={(e) => updateInterEmail(e.target.value)}
           />
         </label>
-        <label htmlFor="startTime">
+        <label className="form-info" htmlFor="Interviewer Name">
+          Interviewer Name
+          <input
+            id="interviewerName"
+            value={interviewerName}
+            placeholder="Interviewer Name"
+            onChange={(e) => updateInterName(e.target.value)}
+          />
+        </label>
+        </div>
+
+        <div className="form-table">
+        <label className="form-info" htmlFor="startTime">
           Start Time
           <input
             type="time"
@@ -101,7 +114,7 @@ const SetInterview = (props) => {
             onChange={(ev) => updateStartTime(ev.target.value)}
           />
         </label>
-        <label htmlFor="EndTime">
+        <label className="form-info" htmlFor="EndTime">
           End Time
           <input
             type="time"
@@ -111,8 +124,9 @@ const SetInterview = (props) => {
             onChange={(ev) => updateEndTime(ev.target.value)}
           />
         </label>
+        </div>
 
-        <button>Submit</button>
+        <button className="submit-button">Submit</button>
       </form>
     </div>
   );
