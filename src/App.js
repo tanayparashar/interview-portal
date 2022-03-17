@@ -1,5 +1,6 @@
 import './App.css';
 import { useEffect ,useState} from 'react';
+import ScrollToTop from "react-scroll-to-top";
 //import Candidate from "./Candidate";
 import SetInterview from './SetInterview';
 function App() {
@@ -39,6 +40,7 @@ function App() {
     updateInterName(interviewerName);
     updateInterEmail(interviewerEmail);
     <SetInterview interviewerEmail={interviewerEmail} interviewerName={interviewerName} candidateEmail={candidateEmail} candidateName={candidateName} endTime={endTime} startTime={startTime} updateInterEmail={updateInterEmail} updateInterName={updateInterName} updateCandidateEmail={updateCandidateEmail} updateCandidateName={updateCandidateName} updateEndTime={updateEndTime} updateStartTime={updateStartTime}></SetInterview>
+    window.scrollTo(0,0);
   }
 
   function requestOBJ()
