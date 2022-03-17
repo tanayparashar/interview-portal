@@ -14,7 +14,24 @@ function App() {
   //const [hello,updateHello]=useState("hello");
   function customupdate(candidateName,candidateEmail,interviewerName,interviewerEmail, startTime, endTime)
   {
-    //console.log(candidateName,candidateEmail,interviewerName,interviewerEmail, startTime, endTime);
+    let data={candidateName:candidateName,candidateEmail:candidateEmail,interviewerName:interviewerName,interviewerEmail:interviewerEmail, startTime:startTime, endTime:endTime}
+    console.log(candidateName,candidateEmail,interviewerName,interviewerEmail, startTime, endTime);
+    fetch('http://patch:5000/candidates/delete', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json'
+    },
+    mode:"cors",
+    body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
     updateCandidateName(candidateName);
     updateCandidateEmail(candidateEmail);
     updateStartTime(startTime);
@@ -23,6 +40,7 @@ function App() {
     updateInterEmail(interviewerEmail);
     <SetInterview interviewerEmail={interviewerEmail} interviewerName={interviewerName} candidateEmail={candidateEmail} candidateName={candidateName} endTime={endTime} startTime={startTime} updateInterEmail={updateInterEmail} updateInterName={updateInterName} updateCandidateEmail={updateCandidateEmail} updateCandidateName={updateCandidateName} updateEndTime={updateEndTime} updateStartTime={updateStartTime}></SetInterview>
   }
+
   function requestOBJ()
   {
     fetch("http://localhost:5000/candidates", {
@@ -54,7 +72,7 @@ function App() {
                   <span>{candidate.interviewerEmail}</span>
                   <span>{candidate.startTime}</span>
                   <span>{candidate.endTime}</span>
-                  <button onClick={()=>customupdate(candidate.candidateName,candidate.candidateEmail,candidate.interviewerName,candidate.interviewerEmail, candidate.startTime, candidate.endTime)}>Edit</button>
+                  <button onClick={(e)=>{e.preventDefault();customupdate(candidate.candidateName,candidate.candidateEmail,candidate.interviewerName,candidate.interviewerEmail, candidate.startTime, candidate.endTime);}}>Edit</button>
               </div>
             );
           })
