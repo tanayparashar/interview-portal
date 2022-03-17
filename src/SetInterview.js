@@ -49,6 +49,7 @@ const SetInterview = (props) => {
   }
   return(
     <div className="page">
+      <h2>Interview Portal</h2>
       <form className="candidate-form" onSubmit={(e) => {
           e.preventDefault();
           setCandidate();
